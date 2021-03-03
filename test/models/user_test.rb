@@ -6,6 +6,7 @@ class UserTest < ActiveSupport::TestCase
       first_name: 'Rami',
       last_name: 'Rizk',
       email: 'rami@gtlogic.com'
+      role: 'member'
     })
   end
 
