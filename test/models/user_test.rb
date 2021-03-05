@@ -5,8 +5,10 @@ class UserTest < ActiveSupport::TestCase
     @user = User.create({
       first_name: 'Rami',
       last_name: 'Rizk',
-      email: 'rami@gtlogic.com',
-      role: 'member'
+      email: 'rami1@gtlogic.com',
+      role: 'member',
+      password: '1234',
+      password_confirmation: '1234'
     })
   end
 
@@ -41,15 +43,16 @@ class UserTest < ActiveSupport::TestCase
     @user.email = 'rami@gtlogic.com'
     assert @user.invalid?
     assert_equal @user.errors[:email].length, 1
-    assert @user.errors[:email].include?("taken")
+    assert @user.errors[:email].include?("has already been taken")
     @user.email = nil
     assert @user.invalid?
-    assert_equal @user.errors[:email].length, 1
+    assert_equal @user.errors[:email].length, 2
+    assert @user.errors[:email].include?("is invalid")
     assert @user.errors[:email].include?("can't be blank")
     @user.email = 'rami'
     assert @user.invalid?
     assert_equal @user.errors[:email].length, 1
-    assert @user.errors[:email].include?("invalid")
+    assert @user.errors[:email].include?("is invalid")
   end
 
   test 'role options validation' do
@@ -60,7 +63,20 @@ class UserTest < ActiveSupport::TestCase
     assert @user.valid?
     @user.role = 'guest'
     assert @user.invalid?
-    # @user.role = !'member' && !'admin'
-    # assert @user.invalid?
+    assert_equal @user.errors[:role].length, 1
+    assert @user.errors[:role].include?("must be accepted")
+  end
+
+  test 'password validation' do
+    assert @user.valid?
+    @user.password_confirmation = nil
+    assert @user.invalid?
+    assert_equal @user.errors[:password_confirmation].length, 1
+    assert @user.errors[:password_confirmation].include?("can't be blank")
+    @user.password = nil
+    @user.password_confirmation = '1234'
+    assert @user.invalid?
+    assert_equal @user.errors[:password].length, 1
+    assert @user.errors[:password].include?("can't be blank")
   end
 end

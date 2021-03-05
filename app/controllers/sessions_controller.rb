@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :check_logged_in, except: [:destroy]
+
   def new
   end
 
@@ -10,13 +12,19 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       @alert = 'Email or password is invalid'
+      render :new
     end
-    render :new
   end
 
   def destroy
     log_out
     @alert = 'Logged out'
     render :new
+  end
+
+  def check_logged_in
+    if logged_in?
+      redirect_to root_path
+    end
   end
 end
