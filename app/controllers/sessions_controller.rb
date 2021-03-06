@@ -4,7 +4,8 @@
 class SessionsController < ApplicationController
   before_action :check_logged_in, except: [:destroy]
 
-  def new end
+  def new
+  end
 
   def create
     user = User.find_by_email(params[:session][:email])
