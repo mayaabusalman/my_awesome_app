@@ -6,7 +6,7 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-    fixtures :all
+  fixtures :all
 
   def log_in_as(user, password)
     post login_path, params: {

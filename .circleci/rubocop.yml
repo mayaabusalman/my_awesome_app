@@ -11,3 +11,5 @@ AllCops:
     - 'spec/fixtures/**/*'
     - 'tmp/**/*'
   NewCops: enable
+Style/FrozenStringLiteralComment:
+  Enabled: false
