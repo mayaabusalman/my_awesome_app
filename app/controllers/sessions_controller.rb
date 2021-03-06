@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
+# This class is for session controller
 class SessionsController < ApplicationController
   before_action :check_logged_in, except: [:destroy]
 
-  def new
-  end
+  def new end
 
   def create
     user = User.find_by_email(params[:session][:email])
 
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       login(user)
       redirect_to root_path
     else
@@ -23,8 +25,6 @@ class SessionsController < ApplicationController
   end
 
   def check_logged_in
-    if logged_in?
-      redirect_to root_path
-    end
+    redirect_to root_path if logged_in?
   end
 end
