@@ -1,5 +1,11 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
+  root 'users#index'
+
   resources :users
-  resources :login
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 end

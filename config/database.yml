@@ -17,8 +17,6 @@ test:
   <<: *default
   database: my_awesome_app_test
   host: localhost
-  password: 1234
-  username: postgres
 
 production:
   <<: *default

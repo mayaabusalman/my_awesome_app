@@ -1,0 +1,15 @@
+Style/Documentation:
+  Enabled: false
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'node_modules/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin//**/*'
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'tmp/**/*'
+  NewCops: enable
+Style/FrozenStringLiteralComment:
+  Enabled: false

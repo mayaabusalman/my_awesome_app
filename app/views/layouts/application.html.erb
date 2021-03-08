@@ -12,6 +12,10 @@
   </head>
 
   <body>
+    <br><br><br>
+    <% if logged_in? %>
+      <%= link_to "Log out", logout_path, method: "delete" %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
